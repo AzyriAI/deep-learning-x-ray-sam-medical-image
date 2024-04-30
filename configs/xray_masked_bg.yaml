@@ -1,0 +1,23 @@
+model_type: "efficientnet_b0"
+batch: 24
+epochs: 100
+initial_lr: 0.001   # 1e-3
+torch:
+  matmul: 'highest' # Sets the internal precision of float32 matrix multiplications (highest, high or medium)
+
+augmentation:
+  rotation_range: 10
+  width_shift_range: 0.1
+  height_shift_range: 0.1
+
+classifier:
+  block2:
+    activation: 'none'
+    output: 2       # two clasess Female or Male
+
+dataset:
+  base_dir: '.'
+  checkpoint_dir:   'output/checkpoint'
+  train_file:       'datasets/xray_masked_bg/tra_masked_bg_400x300.npz'
+  validation_file:  'datasets/xray_masked_bg/val_masked_bg_400x300.npz'
+  test_file:        'datasets/xray_masked_bg/tst_masked_bg_400x300.npz'  
